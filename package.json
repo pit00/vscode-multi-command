@@ -4,6 +4,7 @@
     "description": "Invoke multiple commands as one command.",
     "version": "1.0.0",
     "publisher": "pit00",
+    "icon": "assets/logo.png",
     "repository": {
         "type": "git",
         "url": "https://github.com/pit00/vscode-multi-command.git"
