@@ -21,7 +21,14 @@ export class Command {
                 } else {
                     args = this.args;
                 }
-                for(let i = 0; i < this.repeat; i++) {
+                let rep = this.repeat;
+                
+                if(rep == -1)
+                    if(vscode.window.activeTextEditor?.selections.length !== undefined)
+                        rep = vscode.window.activeTextEditor?.selections.length
+                
+                for(let i = 0; i < rep; i++) {
+                    console.log("CommandService#executeCommand [LOG] loop" + i);
                     await vscode.commands.executeCommand(this.exe, args);
                 }
             } else {
@@ -41,7 +48,7 @@ export class Command {
                 }
             } else {
                 throw(e);
-           }
+            }
         }
     }
 

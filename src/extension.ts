@@ -160,7 +160,7 @@ export async function pickMultiCommand() {
 
     const picks = multiCommands.filter((multiCommand) => {
         if (languageId) {
-            return (multiCommand.languages?.indexOf(languageId) ?? 1)  >= 0;
+            return (multiCommand.languages?.indexOf(languageId) ?? 1) >= 0;
         } else {
             return true;
         }

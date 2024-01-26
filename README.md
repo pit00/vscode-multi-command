@@ -14,14 +14,14 @@ There is simple usage that uses only keybindings.json and a usage that uses sett
 
 ### Simple Usage with keybindings.json
 
-In keybindings.json, bind a key to `extension.multiCommand.execute` with passing a command sequence you want to execute as the argument.  
+In keybindings.json, bind a key to `extension.multiCommand.execute` with passing a command sequence you want to execute as the argument.
 For example:
 
 ```json
 {
     "key": "alt+x",
     "command": "extension.multiCommand.execute",
-    "args": { 
+    "args": {
         "sequence": [
             "cursorDown",
             "cursorDown",
@@ -38,7 +38,7 @@ This usage is useful for reusing the defined command sequence in another command
 
 In case using settings.json, the settings has 2 steps.
 
-1. Create command sequence as one command in settings.json.  
+1. Create command sequence as one command in settings.json.
     For example:
 
     ```json
@@ -82,7 +82,7 @@ In case using settings.json, the settings has 2 steps.
     ```
     This style is useful when you want to merge user settings and the workspace settings.
 
-2. Bind a key to created command sequence in keybindings.json.  
+2. Bind a key to created command sequence in keybindings.json.
    For example:
 
     ```json
@@ -116,8 +116,6 @@ In case using settings.json, the settings has 2 steps.
         "when": "editorTextFocus"
     }
     ```
-
-    But when you use this key bind style, Visual Studio Code may warn about the command name. see: https://github.com/ryuta46/vscode-multi-command/issues/16
 
 ### Manual Execution
 
@@ -198,10 +196,10 @@ Because some commands substitute these kinds of variables in their extensions, v
 
 If you use variable substituion, set `variableSubstitution` to `true` in command setting.
 
-For example: 
+For example:
 ```json
 "sequence": [
-    { 
+    {
         "command": "type",
         "args": { "text": "Font size is ${config:editor.fontSize}" },
         "variableSubstitution": true
@@ -248,17 +246,17 @@ The above `multiCommand.down3Lines` sample also written as follows by using `rep
 You can also repeat a sequence by using `extension.multiCommand.execute` or defined command in settings.json.
 
 ```json
-{
+    {
     "sequence": [
-        { 
-            "command": "extension.multiCommand.execute", 
+        {
+            "command": "extension.multiCommand.execute",
             "args": {
                 "sequence": [
                     "editor.action.commentLine",
                     "cursorDown"
                 ]
             },
-            "repeat": 5 
+            "repeat": 5
         }
     ],
 }
@@ -268,7 +266,7 @@ This sequence add line comment to next 5 lines.
 
 #### Conditioned commands
 
-A sequence can be branched by the result of whether or not a given command terminated with an error. 
+A sequence can be branched by the result of whether or not a given command terminated with an error.
 This feature is useful when you are not sure if an extension is installed or not. You can use an alternative command if the extension is not installed.
 
 For example:
@@ -286,7 +284,7 @@ Note that there must be at least one space on each side of the `||` operator.
 For more complex command like passing arguments, use `onFail` field.
 ```json
 "sequence": [
-    { 
+    {
         "command": "A",
         "onFail": [
             "B",

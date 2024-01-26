@@ -1,12 +1,12 @@
 {
-    "name": "multi-command",
-    "displayName": "multi-command",
+    "name": "multiple-commands",
+    "displayName": "Multiple Commands",
     "description": "Invoke multiple commands as one command.",
-    "version": "1.6.0",
-    "publisher": "ryuta46",
+    "version": "1.0.0",
+    "publisher": "pit00",
     "repository": {
         "type": "git",
-        "url": "https://github.com/ryuta46/vscode-multi-command.git"
+        "url": "https://github.com/pit00/vscode-multi-command.git"
     },
     "engines": {
         "vscode": "^1.10.0"
@@ -19,7 +19,7 @@
         "Other"
     ],
     "activationEvents": [
-        "*"
+        "onStartupFinished"
     ],
     "main": "./out/extension.js",
     "contributes": {
