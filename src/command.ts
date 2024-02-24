@@ -28,7 +28,6 @@ export class Command {
                         rep = vscode.window.activeTextEditor?.selections.length
                 
                 for(let i = 0; i < rep; i++) {
-                    console.log("CommandService#executeCommand [LOG] loop" + i);
                     await vscode.commands.executeCommand(this.exe, args);
                 }
             } else {
