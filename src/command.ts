@@ -23,16 +23,49 @@ export class Command {
                 }
                 let rep = this.repeat;
                 
-                if(rep == -1)
+                if(rep == 0) // manual loop
                     if(vscode.window.activeTextEditor?.selections.length !== undefined)
                         rep = vscode.window.activeTextEditor?.selections.length
                 
-                for(let i = 0; i < rep; i++) {
-                    await vscode.commands.executeCommand(this.exe, args);
+                if(rep == -1){ // auto loop
+                    if(vscode.window.activeTextEditor?.selections.length !== undefined){
+                        rep = vscode.window.activeTextEditor?.selections.length
+                        
+                        await vscode.commands.executeCommand("multiple-cursor-pattern.OrderMult")
+                        for(let i = 0; i < rep; i++) {
+                            await vscode.commands.executeCommand(this.exe, args); // Cmds
+                            await vscode.commands.executeCommand("custom.RemoveFirstCursor")
+                        }
+                        await vscode.commands.executeCommand("cursorLineEnd")
+                        await vscode.commands.executeCommand("cancelSelection")
+                    }
+                }else{
+                    for(let i = 0; i < rep; i++) {
+                        await vscode.commands.executeCommand(this.exe, args);
+                    }
                 }
             } else {
-                for(let i = 0; i < this.repeat; i++) {
-                    await vscode.commands.executeCommand(this.exe);
+                let rep = this.repeat;
+                
+                if(rep == 0) // manual loop (may not work)
+                    if(vscode.window.activeTextEditor?.selections.length !== undefined)
+                        rep = vscode.window.activeTextEditor?.selections.length
+                
+                if(rep == -1){ // auto loop
+                    if(vscode.window.activeTextEditor?.selections.length !== undefined){
+                        rep = vscode.window.activeTextEditor?.selections.length
+                        await vscode.commands.executeCommand("multiple-cursor-pattern.OrderMult")
+                        for(let i = 0; i < rep; i++) {
+                            await vscode.commands.executeCommand(this.exe); // Cmd
+                            await vscode.commands.executeCommand("custom.RemoveFirstCursor")
+                        }
+                        await vscode.commands.executeCommand("cursorLineEnd")
+                        await vscode.commands.executeCommand("cancelSelection")
+                    }
+                }else{
+                    for(let i = 0; i < rep; i++) {
+                        await vscode.commands.executeCommand(this.exe);
+                    }
                 }
             }
             if (this.onSuccess) {
